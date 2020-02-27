@@ -17,12 +17,13 @@ public class SimpleList {
 		list = new int[10];
 	}
 	
-	//function to add elements in the array
+	//function to add elements to the beginning of the array
 	public void add(int number){
 		if (count == 0) {
 			list[count] = number;
 			count++;
 		}
+		
 		else if (count < list.length){
 			int[] tempArray = new int[10];
 			for(int index = 0; index < count; index++){
@@ -35,11 +36,11 @@ public class SimpleList {
 			
 			count++;
 		}
+		//This will change the array size by 50% if the limit is reached 
 		else {
 			int[] tempArray = new int[(int) ((list.length*(.5))+list.length)];
-			//must shift the array to have numbers fall off
+
 			for(int index = 0; index < count; index++){
-				//list[index+1] = list[index];
 				tempArray[index+1]= list[index];
 			}
 			list = tempArray;
@@ -69,12 +70,13 @@ public class SimpleList {
 				count--;
 			}
 		//equation to get the percentage of emtpy slots in the list
-			float totalSlots = (float) ((float)list.length - 1.00);
-			float emptySlots = totalSlots/(float)count;
-			float spacesEmpty  = (emptySlots/(float)count);
-				
+		// will decrease the size of the array by 25%
+		double totalSlots = (double)list.length-1;
+		double emptySlots = totalSlots-(double)count;
+		double spacesEmpty  = (emptySlots/(double)list.length)*100;
+		
 			//System.out.println("Spaces Empty: " +spacesEmpty);
-			if(spacesEmpty > .25){
+			if(spacesEmpty > 25){
 				int[] tempArray2 = new int[count];
 				for(int index = 0; index < count; index++){
 					tempArray2[index]= list[index];
@@ -108,6 +110,56 @@ public class SimpleList {
 	}
 			return location;
 }
+	//function will append each number to the end of the list
+	public void append(int number){
+		int[] tempArray = new int[(int) ((list.length*(.5))+list.length)];
+		for(int index = 0; index < count; index++){
+			//list[index+1] = list[index];
+			tempArray[index]= list[index];
+		}
+		list = tempArray;
+		list[count] = number;
+		count++;
+	}
+	
+	//function will print out the first element of the array
+	public int first(){
+		int notThere = -1;
+		if(count==0){
+			return notThere;
+		}
+		else{
+			 return list[0];
+		}
+	}
+	
+	//function will print out the last element of the array
+	public int last(){
+		int notThere = -1;
+		if(count==0){
+			return notThere;
+		}
+		else{
+			return list[count-1];
+		}
+	}
+	
+	//return the number of possible locations left in the list
+	//essentially how many numbers left a person can  add in
+	public int size(){
+		int size = 10;
+		if (count == 0){
+			return size;
+		}
+		else{
+			int totalSlots =  (list.length );
+			int emptySlots = (totalSlots - count);
+			System.out.println("emptys: "+emptySlots);
+			return emptySlots;
+		}
+	}
+	
+	
 	
 	//returning the array in a string
 	@Override
