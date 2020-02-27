@@ -23,17 +23,22 @@ public class SimpleList {
 			list[count] = number;
 			count++;
 		}
-		else if (count < 10){
+		else if (count < list.length){
 			list[count] = number;
 			count++;
 		}
 		else {
-			list[count -1] = 0;
+			//list[count -1] = 0;
+			int[] tempArray = new int[(int) ((list.length*(.5))+list.length)];
 			//must shift the array to have numbers fall off
-			for(int index = count; index >= 0; index--){
-				list[index+1] = list[index];
+			for(int index = 0; index < count; index++){
+				//list[index+1] = list[index];
+				tempArray[index]= list[index];
 			}
+			list = tempArray;
+			list[count] = number;
 			count++;
+			//System.out.println(list.length);
 		}
 	}
 	
@@ -55,6 +60,19 @@ public class SimpleList {
 				//copy over the new array from tempArray to the main array "list" 
 				list = tempArray;
 				count--;
+			}
+		//equation to get the percentage of emtpy slots in the list
+			float totalSlots = (float) ((float)list.length - 1.00);
+			float emptySlots = totalSlots/(float)count;
+			float spacesEmpty  = (emptySlots/(float)count);
+				
+			//System.out.println("Spaces Empty: " +spacesEmpty);
+			if(spacesEmpty > .25){
+				int[] tempArray2 = new int[count];
+				for(int index = 0; index < count; index++){
+					tempArray2[index]= list[index];
+				}
+				list = tempArray2;
 			}
 		     
 	   }
