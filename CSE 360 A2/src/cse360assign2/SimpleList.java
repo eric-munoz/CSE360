@@ -24,19 +24,26 @@ public class SimpleList {
 			count++;
 		}
 		else if (count < list.length){
-			list[count] = number;
+			int[] tempArray = new int[10];
+			for(int index = 0; index < count; index++){
+				
+				tempArray[index+1]= list[index];
+			}
+			
+			list = tempArray;
+			list[0] = number;
+			
 			count++;
 		}
 		else {
-			//list[count -1] = 0;
 			int[] tempArray = new int[(int) ((list.length*(.5))+list.length)];
 			//must shift the array to have numbers fall off
 			for(int index = 0; index < count; index++){
 				//list[index+1] = list[index];
-				tempArray[index]= list[index];
+				tempArray[index+1]= list[index];
 			}
 			list = tempArray;
-			list[count] = number;
+			list[0] = number;
 			count++;
 			//System.out.println(list.length);
 		}
